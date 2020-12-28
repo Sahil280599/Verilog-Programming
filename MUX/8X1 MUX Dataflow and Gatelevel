@@ -1,0 +1,32 @@
+//USING GATE LEVEL 
+module eight_one_mux(input I0, I1, I2, I3, I4, I5, I6, I7, S0, S1, S2, output out);
+wire T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11;
+not(T1, S0);
+not(T2, S1);
+not(T3, S2);
+and(T4, I0, T1, T2, T3), (T5, I1, S0, T2, T3);
+and(T6, I2, T1, S1, T3), (T7, I3, S0, S1, T3);
+and(T8, I4, T1, T2, S2), (T9, I5, S0, T2, S2);
+and(T10, I6, T1, S1, S2), (T11, I7, S0, S1, S2);
+or(out, T4, T5, T6, T7, T8, T9, T10, T11);
+endmodule
+
+
+//USING DATAFLOW 
+
+module eight_one_mux_dataflow(
+
+output out, 
+input I0, I1, I2, I3, I4, I5, I6, I7, S0, S1, S2
+
+);
+
+// NOT OPERATIONS 
+assign S1bar=~S1;
+assign S0bar=~S0;
+assign S2bar=~S2;
+
+// using the equation of 8X1 mux
+assign out = (I0 & S2bar & S1bar & S0bar) | (I1 & S2bar & S1bar & S0) | (I2 & S2bar & S1 & S0bar) + (I3 & S2bar & S1 & S0) 
++ (I4 & S2 & S1bar & S0bar) + (I5 & S2 & S1bar & S0) + (I6 & S2 & S1 & S0bar) + (I7 & S2 & S1 & S0);
+endmodule
