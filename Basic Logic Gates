@@ -1,0 +1,31 @@
+// Or Gate 
+module or_gate(
+    input a,
+    input b,
+    output c
+    );
+	 wire c;
+	 or(c,a,b); 
+	 endmodule
+   
+// AND GATE 
+module andgate(
+    input a,
+    input b,
+    output c
+    );
+	 wire c;
+	 and(c,a,b);
+endmodule
+
+// NOT GATE 
+module notgate(
+input a,
+output b
+);
+wire b;
+not(b,a);
+endmodule
+
+
+
